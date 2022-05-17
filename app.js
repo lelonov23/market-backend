@@ -1,18 +1,16 @@
-const Koa = require("koa");
-const app = new Koa();
-const KoaRouter = require("koa-router");
-const router = new KoaRouter();
+const express = require("express");
+const app = express();
 
-router.get("home", "/", (ctx) => {
-  ctx.body = "hi";
-});
+const { sequelize } = require("./models");
 
-router.get("other", "/other", (ctx) => {
-  ctx.body = "Other stuff";
-});
+app.get("/categories", (req, res) => {});
 
 const PORT = 3030;
 
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(PORT);
+app.listen(PORT, async () => {
+  console.log("listening on port", PORT);
+  await sequelize.authenticate();
+  console.log("db connected");
+});

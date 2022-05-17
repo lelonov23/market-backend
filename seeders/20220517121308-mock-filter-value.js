@@ -3,10 +3,11 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert(
-      "Tests",
+      "FilterValues",
       [
         {
-          test: "John Doe",
+          value: "iOS",
+          filterId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -16,6 +17,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete("Tests", null, {});
+    return queryInterface.bulkDelete("Categories", null, {});
   },
 };
