@@ -18,6 +18,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete("Categories", null, {});
+    return queryInterface.bulkDelete("PresetFilters", null, {});
   },
 };

@@ -5,12 +5,16 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.hasMany(models.FilterValue, {
         foreignKey: "filterId",
+        as: "value",
+      });
+      this.belongsTo(models.PresetFilter, {
+        foreignKey: "filterId",
       });
     }
   }
   FilterData.init(
     {
-      id: DataTypes.INTEGER,
+      id: { type: DataTypes.INTEGER, primaryKey: true },
       name: DataTypes.STRING,
       filterId: DataTypes.INTEGER,
     },

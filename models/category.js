@@ -5,11 +5,16 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.hasMany(models.PresetFilter, {
         foreignKey: "categoryId",
+        as: "filters",
+        required: false,
       });
       this.hasMany(models.Category, {
         foreignKey: "categoryId",
       });
       this.belongsTo(models.Category, {
+        foreignKey: "categoryId",
+      });
+      this.hasMany(models.Product, {
         foreignKey: "categoryId",
       });
     }

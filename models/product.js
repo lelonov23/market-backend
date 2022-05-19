@@ -1,30 +1,28 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class PresetFilter extends Model {
+  class Product extends Model {
     static associate(models) {
       this.belongsTo(models.Category, {
         foreignKey: "categoryId",
       });
-      this.hasMany(models.FilterData, {
-        as: "filters",
-        foreignKey: "filterId",
-      });
     }
   }
-  PresetFilter.init(
+  Product.init(
     {
       id: { type: DataTypes.INTEGER, primaryKey: true },
       name: DataTypes.STRING,
-      categoryId: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+      categoryId: DataTypes.STRING,
+      type: DataTypes.STRING,
+      img: DataTypes.STRING,
+      cost: DataTypes.INTEGER,
+      stock: DataTypes.INTEGER,
+      orders: DataTypes.INTEGER,
     },
     {
       sequelize,
-      modelName: "PresetFilter",
+      modelName: "Product",
     }
   );
-  return PresetFilter;
+  return Product;
 };
