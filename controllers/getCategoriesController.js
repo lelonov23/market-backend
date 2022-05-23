@@ -1,11 +1,4 @@
-const {
-  Category,
-  Product,
-  Param,
-  PresetFilter,
-  FilterData,
-  FilterValue,
-} = require("../models");
+const { Category, PresetFilter, FilterData, FilterValue } = require("../db");
 
 exports.getCategories = async (req, res) => {
   try {
@@ -33,7 +26,6 @@ exports.getCategories = async (req, res) => {
                   model: FilterValue,
                   as: "value",
                   attributes: ["value"],
-                  raw: true,
                 },
               ],
             },
@@ -42,10 +34,7 @@ exports.getCategories = async (req, res) => {
       ],
     });
 
-    //models to raw json
-    const resCategoriesString = JSON.stringify(categories);
-    //map data to respond with
-    const resCategories = JSON.parse(resCategoriesString).map(
+    const resCategories = JSON.parse(JSON.stringify(categories)).map(
       ({ filters, ...attrs }) => {
         if (filters.length === 0) return attrs;
         const newFilters = filters.map((filter) => {
@@ -62,33 +51,6 @@ exports.getCategories = async (req, res) => {
     );
 
     res.status(200).send(resCategories);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};
-
-exports.getProducts = async (req, res) => {
-  try {
-    const products = await Product.findAll({
-      attributes: {
-        exclude: ["createdAt", "updatedAt"],
-      },
-    });
-    res.status(200).json(products);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};
-
-exports.getParams = async (req, res) => {
-  try {
-    const params = await Param.findAll({
-      attributes: {
-        exclude: ["createdAt", "updatedAt", "id"],
-      },
-    });
-
-    res.status(200).json(params);
   } catch (error) {
     res.status(500).send(error);
   }
