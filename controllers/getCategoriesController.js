@@ -50,7 +50,7 @@ exports.getCategories = async (req, res) => {
       }
     );
 
-    res.status(200).send(resCategories);
+    res.status(200).json(resCategories);
   } catch (error) {
     res.status(500).send(error);
   }

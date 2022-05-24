@@ -23,7 +23,7 @@ if (config.use_env_variable) {
 
 fs.readdirSync(modelDir)
   .filter((file) => {
-    return file !== basename && file.endsWith(".js");
+    return file.endsWith(".js");
   })
   .forEach((file) => {
     const model = require(path.join(modelDir, file))(
