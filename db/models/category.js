@@ -32,14 +32,23 @@ module.exports = (sequelize, DataTypes) => {
       categoryId: {
         type: DataTypes.STRING,
         allowNull: true,
+        get() {
+          return this.getDataValue("categoryId") || undefined;
+        },
       },
       type: {
         type: DataTypes.STRING,
         allowNull: true,
+        get() {
+          return this.getDataValue("type") || undefined;
+        },
       },
       img: {
         type: DataTypes.STRING,
         allowNull: true,
+        get() {
+          return this.getDataValue("img") || undefined;
+        },
       },
     },
     {
