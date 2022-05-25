@@ -10,7 +10,7 @@ app.use(cors());
 
 app.use("/", indexRouter);
 
-const PORT = 3030;
+const PORT = 5000;
 
 app.listen(PORT, async () => {
   console.log("listening on port", PORT);
