@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - 5000:5000
+    command: >
+      sh -c "npm run migrate && npm run seed && npm run start"
+    depends_on:
+      - db
+    restart: always
+  db:
+    container_name: db
+    image: postgres:12
+    env_file:
+      - .env
+    environment:
+      PG_DATA: /var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  pgdata:
